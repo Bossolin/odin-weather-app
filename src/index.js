@@ -1,47 +1,46 @@
+import Data from "./Data";
 import "./style.css";
 
-let dataObj = {};
+(() => {
+  const header = (() => {
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("header");
+    headerDiv.innerText = "Weather App";
+    return headerDiv;
+  })();
 
-const processData = (data) => {
-  dataObj = {
-    clouds: data.clouds,
-    main: data.main,
-    name: data.name,
-    rain: data.rain,
-    snow: data.snow,
-    weather: data.weather[0],
-    wind: data.wind,
+  const submitCity = (e) => {
+    e.preventDefault();
+    const city = e.path[1][0].value;
+    Data.getWeatherData(city);
   };
-};
 
-const getWeatherData = async (location) => {
-  try {
-    const request = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=7e290a13a31e4917e8dde47f392e9439`
-    );
-    const data = await request.json();
-    processData(data);
-    console.log(dataObj);
-  } catch (err) {
-    // Add error message when no city found
-    console.log("ERROR =>", err);
-  }
-};
+  const formTag = (() => {
+    const form = document.createElement("form");
 
-const submitCity = (e) => {
-  e.preventDefault();
-  const city = e.path[1][0].value;
-  getWeatherData(city);
-};
+    const input = document.createElement("input");
+    input.classList.add("input-city");
 
-const formTag = (() => {
-  const form = document.createElement("form");
-  const input = document.createElement("input");
-  const btn = document.createElement("button");
-  btn.innerText = "»";
-  btn.addEventListener("click", submitCity);
-  form.appendChild(input, btn);
-  return form;
+    const btn = document.createElement("button");
+    btn.classList.add("submit-btn");
+    btn.innerText = "»";
+    btn.addEventListener("click", submitCity);
+
+    form.appendChild(input);
+    form.appendChild(btn);
+    return form;
+  })();
+
+  const dataDiv = (() => {
+    const data = document.createElement("div");
+    data.classList.add("data");
+
+    return data;
+  })();
+
+  document.body.appendChild(header);
+  document.body.appendChild(formTag);
+  document.body.appendChild(dataDiv);
+
+  Data.getWeatherData("Tromso");
 })();
-
-document.body.appendChild(formTag);
