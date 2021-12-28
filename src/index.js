@@ -13,6 +13,7 @@ import "./style.css";
     e.preventDefault();
     const city = e.path[1][0].value;
     Data.getWeatherData(city);
+    e.path[1].reset();
   };
 
   const formTag = (() => {

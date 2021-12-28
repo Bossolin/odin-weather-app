@@ -68,7 +68,14 @@ const Data = (() => {
       console.log(dataObj);
       displayWeather(dataObj);
     } catch (err) {
-      // Add error message when no city found
+      const dataDiv = document.querySelector(".data");
+      dataDiv.innerHTML = "";
+
+      const error = document.createElement("div");
+      error.innerText = "No such city found:(";
+      error.classList.add("error");
+
+      dataDiv.appendChild(error);
       console.log("ERROR =>", err);
     }
   };
