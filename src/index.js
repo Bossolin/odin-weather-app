@@ -42,6 +42,4 @@ import "./style.css";
   document.body.appendChild(header);
   document.body.appendChild(formTag);
   document.body.appendChild(dataDiv);
-
-  Data.getWeatherData("Tromso");
 })();

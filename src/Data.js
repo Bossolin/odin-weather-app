@@ -15,6 +15,7 @@ const Data = (() => {
 
   const displayWeather = (data) => {
     const dataDiv = document.querySelector(".data");
+    dataDiv.classList.add("active");
     dataDiv.innerHTML = "";
 
     const cityName = document.createElement("div");
@@ -69,6 +70,7 @@ const Data = (() => {
       displayWeather(dataObj);
     } catch (err) {
       const dataDiv = document.querySelector(".data");
+      dataDiv.classList.add("active");
       dataDiv.innerHTML = "";
 
       const error = document.createElement("div");
